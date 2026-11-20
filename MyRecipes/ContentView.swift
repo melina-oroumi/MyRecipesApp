@@ -9,16 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List(sampleRecipes) { recipe in
+                NavigationLink {
+                    RecipeDetailView(recipe: recipe)
+                } label: {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(recipe.name)
+                            .font(.headline)
+
+                        Text("\(recipe.cookingTime) minutes")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 4)
+                }
+            }
+            .navigationTitle("My Recipes")
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
 }
+
